@@ -1,5 +1,5 @@
 {
-  "name": "WebArchive Mounter",
+  "name": "SingleHtml Reader",
   "short_name": "WebArchive",
   "description": "Mount and view archive files locally.",
   "start_url": "index.html",

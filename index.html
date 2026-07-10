@@ -1,1 +1,32 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WebArchive Mounter</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4a90e2"><link rel="stylesheet" href="app.css"></head><body><div id="upload-container" class="active"><div id="drop-zone"><p>Drag and drop an archive (.tar, .gz, .br, .zst, .zip) here</p><p>or</p><input type="file" id="file-input" accept=".tar,.tar.gz,.tgz,.tar.br,.tar.zstd,.tar.zst,.tar.zip,.zip,.br"><label for="file-input" class="button">Select File</label></div><div id="loading" class="hidden"><p>Mounting archive... <span id="progress"></span></p></div></div><iframe id="sandbox-frame" class="hidden" src="about:blank"></iframe><script type="module" src="bundle.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en-US" data-singlehtml-polyglot="true">
+<head>
+<meta charset="UTF-8">
+<title>SingleHtml Loading...</title>
+<style>
+  body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #fafafa; color: #374151; }
+  .loader { text-align: center; }
+  .spinner { border: 3px solid #f3f4f6; border-top: 3px solid #9ca3af; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .error { display: none; width: 100%; max-width: 680px; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); word-break: break-all; margin: 20px; box-sizing: border-box; }
+  .drop-zone { border: 2px dashed #e5e7eb; border-radius: 12px; padding: 80px 40px; background: #fcfcfc; cursor: pointer; transition: all 0.3s ease; margin-top: 30px; }
+  .drop-zone:hover { background: #f3f4f6; border-color: #d1d5db; }
+  h3 { margin: 0; font-weight: 400; font-size: 18px; line-height: 1.8; color: #6b7280; }
+  .drop-highlight { color: #111827; font-weight: 500; }
+  .title-text { color: #9ca3af; font-size: 15px; margin: 0; }
+</style>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="spinner" id="spinner"></div>
+  <div id="status">正在读取文件...</div>
+</div>
+<div class="error" id="error"></div>
+<iframe id="sandbox-frame" style="width:100%; height:100vh; border:none; display:none;"></iframe>
+
+<script src="fzstd.min.js"></script>
+<script src="viewer_logic.js"></script>
+
+</body>
+</html>
