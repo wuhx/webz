@@ -26,7 +26,26 @@
 <iframe id="sandbox-frame" style="width:100%; height:100vh; border:none; display:none;"></iframe>
 
 <script src="fzstd.min.js"></script>
-<script src="viewer_logic.js"></script>
+<script>
+  (() => {
+    const id = new URLSearchParams(location.search).get('id') || '';
+    if (!/^[0-9A-Za-z]{8}$/.test(id)) return;
+
+    window.singleHtmlBridgeId = id;
+    const status = document.getElementById('status');
+    status.textContent = '正在通过 SingleHtml 扩展打开离线文档…';
+    setTimeout(() => {
+      status.textContent = '未检测到 SingleHtml 扩展，请确认扩展已安装并启用。';
+    }, 3000);
+  })();
+</script>
+<script>
+  if (!window.singleHtmlBridgeId) {
+    const viewerScript = document.createElement('script');
+    viewerScript.src = 'viewer_logic.js';
+    document.body.appendChild(viewerScript);
+  }
+</script>
 
 </body>
 </html>
