@@ -1,6 +1,6 @@
 {
-  "name": "SingleHtml Reader",
-  "short_name": "WebArchive",
+  "name": "webz Reader",
+  "short_name": "webz",
   "description": "Mount and view archive files locally.",
   "start_url": "index.html",
   "display": "standalone",
