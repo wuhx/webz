@@ -1,0 +1,8 @@
+User request
+Investigate an intermittent WEBZ PWA failure that remained on “Loading”, add diagnostics, implement a reliable fix, and publish it. The archive itself had subsequently opened successfully, so the work focused on lifecycle races rather than archive corruption.
+
+Implementation
+Removed the deployed PWA’s unnecessary self-fetch during startup. Added correlated debug/error lifecycle logs, bounded timeouts, explicit asynchronous error handling, Service Worker activation/update checks, and an acknowledged mount-index handoff. Simplified the sandbox-scoped Service Worker so installation no longer waits for unrelated shell pre-caching, restricted interception to sandbox requests, validated archive indexes and OPFS ranges, surfaced failures as explicit responses, and removed obsolete PWA caches. Generated the updated minified viewer and Service Worker assets in the webz-pwa repository.
+
+Validation
+Reused the final validation from this task after the generated files were last changed: npm test passed 9/9, JavaScript syntax checks passed for viewer_logic.js and pwa-sw.js, and git diff --check passed. A real Chromium end-to-end run loaded data/Facebook.webz, decompressed about 20 MB, acknowledged 7 archive entries through the updated Service Worker, and rendered the archived Facebook page in the sandbox. A secret-pattern scan of the two published assets returned no matches.
